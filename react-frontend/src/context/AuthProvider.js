@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogout = () => {
+    document.cookie = `token=${undefined}`
     setToken(null);
   };
 

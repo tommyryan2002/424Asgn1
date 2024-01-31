@@ -17,12 +17,17 @@ export const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {username, password}
+    data['token'] = document.cookie.split(";")[0].split("=")[1]
+    console.log(data)
     try {
       const response = await axios.post(
-        "http://localhost:8000/login",
+        "https://localhost:8000/login",
         data
       )
+      console.log(response)
       if (response.status === 200) {
+        console.log(response)
+        document.cookie = `token=${response.data}`
         value.onLogin();
       } else {
         setUsername("WRONG USER/PASSWORD");
@@ -38,7 +43,7 @@ export const LoginForm = () => {
     const data = {username, password}
     try {
       const response = await axios.post(
-        "http://localhost:8000/users",
+        "https://localhost:8000/users",
         data
       )
       if (response.status === 200) {

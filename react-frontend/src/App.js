@@ -21,7 +21,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    setToken(null);
+    document.cookie = `token=${undefined}`
   };
 return (
   <AuthProvider>
