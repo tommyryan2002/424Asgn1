@@ -97,6 +97,9 @@ const findUserByName = (name) => {
     return users['users_list'].filter( (user) => user['name'] === name); 
 }
 
+app.disable('x-powered-by');
+app.use(csrf());
+
 https.createServer({
 	key: fs.readFileSync("./reactcert/key.pem"),
 	cert: fs.readFileSync("./reactcert/cert.pem")
