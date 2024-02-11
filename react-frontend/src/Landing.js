@@ -6,6 +6,15 @@ export const Landing = () => {
   const { value } = useAuth();
   const [users, setUsers] = useState([]);
 
+  const queryParameters = new URLSearchParams(window.location.search);
+  const google_token = queryParameters.get("token");
+
+  if (google_token) {
+    console.log("ITS HERE")
+
+    if (google_token) localStorage.setItem("TOKEN_KEY", google_token);
+  }
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {

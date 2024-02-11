@@ -56,6 +56,26 @@ export const LoginForm = () => {
     }
   };
 
+  const handleOath = async (e) => {
+    console.log("OATH")
+    e.preventDefault();
+    const data = {username, password}
+    try {
+      const response = await axios.post(
+        "https://localhost:8000/request",
+        data
+      )
+      if (response.status === 200) {
+        console.log(response)
+        window.location.href = response.data.url;
+      } else {
+        setUsername("OATH FAILED");
+      }
+    } catch (error) {
+      setUsername("OATH");
+    }
+  };
+
   return (
     <>
     <form onSubmit={handleSubmit}>
@@ -78,8 +98,9 @@ export const LoginForm = () => {
         />
       </div>
       <button type="submit">Submit</button>
-    </form>
     <button onClick={handleRegister}>Register</button>
+    <button onClick={handleOath}>OATH LOGIN</button>
+    </form>
     </>
   );
 };

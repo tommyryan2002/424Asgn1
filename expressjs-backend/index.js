@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const csrf = require('csurf')
 const jwt = require('jsonwebtoken');
 const port = 8000;
 const dotenv = require('dotenv');
@@ -8,6 +9,9 @@ const userServices = require('./models/user-services');
 const User = require('./models/user');
 const https = require("https");
 const fs = require("fs")
+const authRouter = require("./routes/oath");
+
+const requestRouter = require("./routes/request");
 
 dotenv.config();
 
@@ -15,6 +19,10 @@ process.env.TOKEN_SECRET;
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/oath", authRouter);
+
+app.use("/request", requestRouter);
 
 function authenticateToken(token) {
 	console.log(token)
